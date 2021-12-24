@@ -1,4 +1,4 @@
-export default function simlifyUnixPath(path = '') {
+export default function simplifyUnixPath(path = '') {
   let simpifiedPath = path;
 
   // remove trailing slash
@@ -6,5 +6,5 @@ export default function simlifyUnixPath(path = '') {
   // replace current directory './' with single slash
   // handle hierarchy navigation (up and down)
 
-  return simplifiedPath;
+  return simpifiedPath;
 }
