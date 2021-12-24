@@ -1,5 +1,3 @@
-// input [2, 3, 5, 3, 4, 3, 6, 3]
-
 export default class WaterContainer {
   walls;
   unitWidth;
@@ -26,54 +24,43 @@ export default class WaterContainer {
     return sorted.pop();
   }
 
-  calculateVolume(leftWallIndex, rightWallIndex) {
+  calculateVolume(unitKey) {
+    const [leftWallIndex, rightWallIndex] = this.getWallIndexes(unitKey);
     const width = this.unitWidth * (rightWallIndex - leftWallIndex);
     const height = this.min([this.walls[leftWallIndex], this.walls[rightWallIndex]]);
-    console.log('width * height', width, height)
     return width * height;
-  }
-
-  createUnits() {
-    // loop through walls, make combinations and create collextion of units
-    this.walls.forEach((firstWallHeght, firstIndex) => {
-      this.walls.forEach((secondWallHeght, secondIndex) => {
-
-        // both indexes point to the same wall and container unit can not be created
-        if (firstIndex === secondIndex) return;
-
-        if (firstIndex < secondIndex) {
-          const unitKey = this.getUnitKey(firstIndex, secondIndex);
-
-          if (this.unitExists(unitKey)) {
-            return;
-          }
-          this.units[unitKey] = this.calculateVolume(firstIndex, secondIndex);
-
-          return;
-        }
-
-        if (firstIndex > secondIndex) {
-          const unitKey = this.getUnitKey(secondIndex, firstIndex);
-
-          if (this.unitExists(unitKey)) {
-            return;
-          }
-
-          this.units[unitKey] = this.calculateVolume(secondIndex, firstIndex);
-
-          return;
-        }
-
-      });
-    });
   }
 
   getUnitKey(leftWallIndex, rightWallIndex) {
     return `${leftWallIndex}-${rightWallIndex}`;
   }
 
+  getWallIndexes(unitKey = '') {
+    return unitKey.split('-').map(index => parseInt(index));
+  }
+
   unitExists(unitKey) {
     return unitKey in this.units;
+  }
+
+  createUnits() {
+    // loop through walls, make combinations and create collextion of units
+    this.walls.forEach((_firstWallHeght, firstIndex) => {
+      this.walls.forEach((_secondWallHeght, secondIndex) => {
+
+        // both indexes point to the same wall and container unit can not be created
+        if (firstIndex === secondIndex) return;
+
+        const unitKey = firstIndex < secondIndex ? this.getUnitKey(firstIndex, secondIndex) : this.getUnitKey(secondIndex, firstIndex);
+
+        // don't calculate the same unit twice while looping throught walls
+        if (this.unitExists(unitKey)) {
+          return;
+        }
+
+        this.units[unitKey] = this.calculateVolume(unitKey);
+      });
+    });
   }
 
   detectLargestUnit() {
