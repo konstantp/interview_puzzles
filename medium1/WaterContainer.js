@@ -62,6 +62,7 @@ export default class WaterContainer {
         this.units[unitKey] = this.calculateVolume(unitKey);
       });
     });
+    return this.units;
   }
 
   detectLargestUnit() {
