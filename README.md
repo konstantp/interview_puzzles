@@ -1,1 +1,1 @@
-# interview_puzzles
+# Solutions for Interview Puzzles
