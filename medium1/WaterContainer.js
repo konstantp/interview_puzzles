@@ -66,6 +66,6 @@ export default class WaterContainer {
   }
 
   detectLargestUnit() {
-    return this.max(Object.values(this.units))
+    return this.max(Object.values(this.units));
   }
 }
