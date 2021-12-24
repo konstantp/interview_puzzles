@@ -3,9 +3,10 @@ export default class WaterContainer {
   unitWidth;
   units = {};
 
-  constructor(walls = [], width = 1) {
+  constructor(walls = [], width = 1, depth = 1) {
     this.walls = walls;
     this.unitWidth = width;
+    this.unitDepth = depth;
 
     this.createUnits(walls)
   }
@@ -28,7 +29,7 @@ export default class WaterContainer {
     const [leftWallIndex, rightWallIndex] = this.getWallIndexes(unitKey);
     const width = this.unitWidth * (rightWallIndex - leftWallIndex);
     const height = this.min([this.walls[leftWallIndex], this.walls[rightWallIndex]]);
-    return width * height;
+    return width * height * this.unitDepth;
   }
 
   getUnitKey(leftWallIndex, rightWallIndex) {
