@@ -6,7 +6,7 @@ const graph = [
   },
   { 
     id: 1, 
-    letter: "0",
+    letter: "O",
     connections: [0, 2, 4, 5],
   },
   { 
@@ -26,7 +26,7 @@ const graph = [
   },
   { 
     id: 5, 
-    letter: "0",
+    letter: "O",
     connections: [1, 2, 3, 4, 6, 7],
   },
   { 
