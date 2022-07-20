@@ -4,6 +4,9 @@ describe('WaterContainer:', () => {
   const walls = [2, 3, 5, 3, 4, 3, 6, 3];
   const waterContainer = new WaterContainer(walls);
 
+  const walls2 = [1, 2, 4, 2, 3, 2, 5, 2];
+  const waterContainer2 = new WaterContainer(walls2);
+
   it('should sort array of numbers', () => {
     expect(waterContainer.sort(walls)).toEqual([2, 3, 3, 3, 3, 4, 5, 6]);
   });
@@ -40,7 +43,11 @@ describe('WaterContainer:', () => {
     expect(waterContainer.calculateVolume('2-7')).toBe(15);
   });
 
-  it('should detect the largest unit and return its volume', () => {
+  it('should detect the largest unit for the 1st container and return its volume', () => {
     expect(waterContainer.detectLargestUnit()).toBe(20);
+  });
+
+  it('should detect the largest unit for the 2nd container and return its volume', () => {
+    expect(waterContainer2.detectLargestUnit()).toBe(16);
   });
 });
